@@ -222,7 +222,7 @@
     });
 
     $('#table-drug-a').bootstrapTable({
-        url: 'https://pharmpkdb.com:14488/model/get_drugs',
+        url: 'https://dpi-pt.github.io/data/drug.json',
         contentType: 'application/x-www-form-urlencoded',
         toolbar: '#toolbar-a',
         toolbarAlign: 'right',
@@ -236,7 +236,6 @@
         striped: true,
         pagination: true,
         pageList: [5, 10, 20],
-        uniqueId: 'DrugBank-Id',
         sidePagination: 'client',
         columns: [
             {
@@ -244,27 +243,27 @@
                 checkbox: true,
                 align: 'center',
             }, {
-                field: 'DrugBank_Id',
-                title: 'DrugBank Id',
+                field: 'drug_id',
+                title: 'Drug Id',
                 sortable:true,
             }, {
-                field: 'Name',
+                field: 'name',
                 title: 'Name',
                 sortable:true,
             },{
-                field: 'Cas_Number',
-                title: 'Cas Number',
+                field: 'type',
+                title: 'Type',
                 sortable:true,
             }, {
-                field: 'PubChem_Id',
-                title: 'PubChem Id',
+                field: 'cas_number',
+                title: 'Cas Number',
                 sortable:true,
             }
         ]
     });
 
     $('#table-drug-b').bootstrapTable({
-        url: 'https://pharmpkdb.com:14488/model/get_drugs',
+        url: 'https://dpi-pt.github.io/data/drug.json',
         contentType: 'application/x-www-form-urlencoded',
         toolbar: '#toolbar-b',
         toolbarAlign: 'right',
@@ -278,7 +277,6 @@
         striped: true,
         pagination: true,
         pageList: [5, 10, 20],
-        uniqueId: 'DrugBank-Id',
         sidePagination: 'client',
         columns: [
             {
@@ -286,20 +284,20 @@
                 checkbox: true,
                 align: 'center',
             }, {
-                field: 'DrugBank_Id',
-                title: 'DrugBank Id',
+                field: 'drug_id',
+                title: 'Drug Id',
                 sortable:true,
             }, {
-                field: 'Name',
+                field: 'name',
                 title: 'Name',
                 sortable:true,
             },{
-                field: 'Cas_Number',
-                title: 'Cas Number',
+                field: 'type',
+                title: 'Type',
                 sortable:true,
             }, {
-                field: 'PubChem_Id',
-                title: 'PubChem Id',
+                field: 'cas_number',
+                title: 'Cas Number',
                 sortable:true,
             }
         ]
@@ -342,6 +340,7 @@
     });
 
     var d_name_a;
+	var d_id_a;
     $(function(){
         $('#table-drug-a').on('check.bs.table check-all.bs.table uncheck.bs.table uncheck-all.bs.table',
             function (e, rowsAfter, rowsBefore) {
@@ -354,10 +353,14 @@
                 d_name_a = $.map(!$.isArray(rows) ? [rows] : rows, function (row) {
                     return row.Name;
                 });
+				d_id_a = $.map(!$.isArray(rows) ? [rows] : rows, function (row) {
+                    return row.e_id;
+                });
             });
     });
 
     var d_name_b;
+	var d_id_b;
     $(function(){
         $('#table-drug-b').on('check.bs.table check-all.bs.table uncheck.bs.table uncheck-all.bs.table',
             function (e, rowsAfter, rowsBefore) {
@@ -370,6 +373,9 @@
                 d_name_b = $.map(!$.isArray(rows) ? [rows] : rows, function (row) {
                     return row.Name;
                 });
+				d_id_b = $.map(!$.isArray(rows) ? [rows] : rows, function (row) {
+                    return row.e_id;
+                });
             });
     });
 
@@ -377,7 +383,7 @@
     var flag_b;
     var check_l = [];
 
-    $.get('https://www.pharmpkdb.com:14488/model/check', function(data){
+    $.get('https://ddi-dpi-pt.github.io/data/check.json', function(data){
         $.each(data, function (i, d) {
             check_l.push(d);
         })
@@ -424,8 +430,8 @@
                         method: 'post',
                         queryParams: function (params) {
                             return {
-                                drug_a: d_a,
-                                drug_b: d_b
+                                drug_a: d_id_a,
+                                drug_b: d_id_b
                             }
                         },
                     });
