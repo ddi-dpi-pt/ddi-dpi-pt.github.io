@@ -372,8 +372,10 @@
     var check_l = [];
 
     $.get('https://ddi-dpi-pt.github.io/data/check.json', function(data){
-        console.log(data)
-
+        $.each(data, function (i, d) {
+            check_l.push(d);
+        });
+		console.log(check_l)
     });
 
     $(function(){
