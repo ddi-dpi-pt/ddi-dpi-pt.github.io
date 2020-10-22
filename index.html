@@ -375,7 +375,6 @@
         $.each(data, function (i, d) {
             check_l.push(d);
         });
-		console.log(check_l)
     });
 
     $(function(){
@@ -414,7 +413,7 @@
 
                 if (flag_a == 1 && flag_b == 1) {
                     $('#table-results').bootstrapTable('refreshOptions', {
-                        url: 'https://pharmpkdb.com:14488/model/predict',
+                        url: 'https://pharmpkdb.com:14488/model_2/predict_ddi',
                         method: 'post',
                         queryParams: function (params) {
                             return {
