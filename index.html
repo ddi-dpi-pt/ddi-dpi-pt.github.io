@@ -342,7 +342,7 @@
                     return row.name;
                 });
 				d_id_a = $.map(!$.isArray(rows) ? [rows] : rows, function (row) {
-                    return row.drug_id;
+                    return row.e_id;
                 });
             });
     });
@@ -362,7 +362,7 @@
                     return row.name;
                 });
 				d_id_b = $.map(!$.isArray(rows) ? [rows] : rows, function (row) {
-                    return row.drug_id;
+                    return row.e_id;
                 });
             });
     });
@@ -417,8 +417,8 @@
                         method: 'post',
                         queryParams: function (params) {
                             return {
-                                drug_a: d_id_a,
-                                drug_b: d_id_b
+                                drug_a: JSON.stringify(d_id_a),
+                                drug_b: JSON.stringify(d_id_b)
                             }
                         },
                     });
