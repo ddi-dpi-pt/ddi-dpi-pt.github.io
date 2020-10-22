@@ -315,18 +315,6 @@
         });
     });
 
-    $(function () {
-        $("#drug-pair").submit(function(event){
-            const f=$(this);
-            if(f[0].checkValidity()===false){
-                event.preventDefault();
-                event.stopPropagation();
-            };
-            f.addClass("was-validated");
-        })
-
-    })
-
     $(function(){
         $("#re-bt-a").click(function(){
             $("#table-drug-a").bootstrapTable('resetSearch');
@@ -351,10 +339,10 @@
                 };
 
                 d_name_a = $.map(!$.isArray(rows) ? [rows] : rows, function (row) {
-                    return row.Name;
+                    return row.name;
                 });
 				d_id_a = $.map(!$.isArray(rows) ? [rows] : rows, function (row) {
-                    return row.e_id;
+                    return row.drug_id;
                 });
             });
     });
@@ -371,10 +359,10 @@
                 };
 
                 d_name_b = $.map(!$.isArray(rows) ? [rows] : rows, function (row) {
-                    return row.Name;
+                    return row.name;
                 });
 				d_id_b = $.map(!$.isArray(rows) ? [rows] : rows, function (row) {
-                    return row.e_id;
+                    return row.drug_id;
                 });
             });
     });
@@ -384,9 +372,7 @@
     var check_l = [];
 
     $.get('https://ddi-dpi-pt.github.io/data/check.json', function(data){
-        $.each(data, function (i, d) {
-            check_l.push(d);
-        })
+        console.log(data)
 
     });
 
